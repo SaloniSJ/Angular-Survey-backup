@@ -1,0 +1,40 @@
+<div class="heightautos" *ngFor="let option of option">
+    <label class="contatradio">
+      <input type="radio" checked="checked" />
+      <span class="checkmarkrd"></span>
+    </label>
+    <input
+      type="text"
+      name="yes"
+      placeholder="Option 1"
+      class="optionranking chkleft"
+      [value]="option.optionText"
+    />
+    <div class="attached-closesd ">
+      <img
+        src="../../../../assets/img/icon-close.png"
+        class=" btn btn-default attached-closebtn"
+      />
+    </div>
+    <div class="attached-closesd ">
+      <div class="upload-btn-wrapper">
+        <button class="btn borderrt">
+          <img src="../../../../assets/img/attached.png" class="pin" />
+        </button>
+        <input type="file" name="myfile" />
+      </div>
+    </div>
+    <div class="attached-closesd ">
+      <img src="../../../../assets/img/perfume.png" class="perfume-img" />
+    </div>
+
+    <!---other option---->
+    <div *ngIf="option.otherOptionAvailable">
+      <input 
+        type="text"
+        placeholder="Other Option {{option.optionId}}"
+        class="optioncheck chkleft"
+      />
+    </div>
+    <!---other option---->
+  </div>

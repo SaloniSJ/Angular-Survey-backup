@@ -1,0 +1,23 @@
+<div class="heightautos" *ngFor="let option of option">
+  <label class="container">
+    <input type="checkbox" checked="checked" />
+    <span class="checkmark"></span>
+  </label>
+  <input
+    type="text"
+    name="optionText"
+    [value]="option.optionText"
+    placeholder="Option 1"
+    class="optionranking chkleft"
+  />
+  <!---other option---->
+  <div *ngIf="option.otherOptionAvailable">
+    <input
+      type="text"
+      name="yes"
+      placeholder="Option 1"
+      class="optioncheck chkleft"
+    />
+  </div>
+  <!---other option---->
+</div>

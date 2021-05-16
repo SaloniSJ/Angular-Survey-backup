@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="moblogo_box">
+            <img src="../../assets/images/logo.png" alt="" class="img-responsive">
+        </div>
+
+        <div class="col-md-12 col-lg-6 pad0">
+            <div class="main_img">
+                <img src="../../assets/images/MaskGroup5.png" alt="" class="img-responsive desktop_img">
+                <img src="../../assets/images/mob_img5.png" alt="" class="img-responsive mob_img">
+            </div>
+
+            <div class="logo_box">
+                <img src="../../assets/images/logo.png" alt="" class="img-responsive">
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+            <div class="center_box otp">
+                <div class="form_box">
+
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="errorMsg">
+                        <strong> {{errorMsg}} </strong>
+                        <button type="button" class="close" data-dismiss="alert" (click)="closeAlert()"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <h1 class="title active">Email Verification</h1>
+
+                    <form id="form" #verifyEmailForm="ngForm" (ngSubmit)="verifyEmail()" novalidate>
+
+                        <p class="">An email with verification code is sent on the registered email id {{emailId}}</p>
+
+                        <input name="id1" autofocus (keyup)="keyUpEvent($event)" (keydown.backspace)="keyDownEvent($event)" [class.error_input]="id1.invalid && id1.touched" #id1="ngModel"
+                            [(ngModel)]="otpModel.id1" required type="text" maxlength="1" />
+                        <input name="id2" (keyup)="keyUpEvent($event)" (keydown.backspace)="keyDownEvent($event)" [class.error_input]="id2.invalid && id2.touched" #id2="ngModel"
+                            [(ngModel)]="otpModel.id2" required type="text" maxlength="1" />
+                        <input name="id3" (keyup)="keyUpEvent($event)" (keydown.backspace)="keyDownEvent($event)" [class.error_input]="id3.invalid && id3.touched" #id3="ngModel"
+                            [(ngModel)]="otpModel.id3" required type="text" maxlength="1" />
+                        <input name="id4" (keyup)="keyUpEvent($event)" (keydown.backspace)="keyDownEvent($event)" [class.error_input]="id4.invalid && id4.touched" #id4="ngModel"
+                            [(ngModel)]="otpModel.id4" required type="text" maxlength="1" />
+                        <input name="id5" (keyup)="keyUpEvent($event)" (keydown.backspace)="keyDownEvent($event)" [class.error_input]="id5.invalid && id5.touched" #id5="ngModel"
+                            [(ngModel)]="otpModel.id5" required type="text" maxlength="1" />
+                        <div class="form-group text-right forget">
+                            <!-- <a class="ForgetPwd">Change Email ID</a> -->
+                        </div>
+                        <div class="btn_box">
+                            <button type="submit" [disabled]="verifyEmailForm.invalid" class="btn btn-primary">VERIFY</button>
+                            <button type="reset" class="btn btn-primary">RESET</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="heightautos" *ngFor="let option of option">
+    <label class="container">
+      <input type="checkbox" checked="checked" />
+      <span class="checkmark"></span>
+    </label>
+    <input
+      type="text"
+      name="yes"
+      placeholder="Option 2"
+      class="optionranking chkleft"
+      [value]="option.optionText"
+    />
+    <div class="attached-closesd">
+      <span class="float-right">
+        <div class="upload-btn-wrapper">
+          <button class="btn">
+            <img src="../../../../assets/img/attached.png" class="pin" />
+          </button>
+          <input type="file" name="myfile" />
+        </div>
+      </span>
+    </div>
+    <div *ngif="option.otherOptionAvailable">
+      <input
+        type="text"
+        name="yes"
+        placeholder="Enter Text Here"
+        class="optioncheckauto chkleft"
+      />
+      <input
+        type="text"
+        name="yes"
+        placeholder="Add Other Option"
+        class="optioncheckauto chkleft"
+      />
+    </div>
+  </div>

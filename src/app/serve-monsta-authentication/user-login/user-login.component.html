@@ -1,0 +1,95 @@
+<main>
+   <div class="container-fluid">
+      <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+      <div class="row">
+         <div class="moblogo_box">
+            <img src="../../assets/images/logo.png" alt="" class="img-responsive">
+         </div>
+         <div class="col-lg-6 col-md-12 pad0">
+            <div class=" main_img">
+               <img src="../../assets/images/MaskGroup1.png" alt="" class="img-responsive desktop_img">
+               <img src="../../assets/images/mob_img1.png" alt="" class="img-responsive mob_img">
+            </div>
+            <div class="logo_box">
+               <img src="../../assets/images/logo.png" alt="" class="img-responsive">
+            </div>
+         </div>
+         <div class="col-lg-6 col-md-12">
+            <div class="center_box">
+            <div class="form_box">
+
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="errorMsg">
+                     <strong> {{errorMsg}} </strong>
+                     <button type="button" class="close" data-dismiss="alert" (click)="closeAlert()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  
+                  <h1 class="title active">Login</h1>
+                  <a routerLink="/signup">
+                     <h1 class="title">Sign Up</h1>
+                  </a>
+                 
+                  <form id="form" #signInForm="ngForm" (ngSubmit)="signin()" novalidate>
+
+                     <div [class.error_input]="emailOrMobile.invalid && emailOrMobile.touched" class="form-label-group form-input">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <input type="email" id="inputEmail" class="form-control" placeholder="John@abc.com"
+                        #emailOrMobile="ngModel" [(ngModel)]="userSignInModel.emailOrMobile" name="emailOrMobile" required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        <label for="inputEmail">Email or Mobile</label>
+                        <div class="underline"></div>
+                      </div>
+
+                     <div class="error" *ngIf="emailOrMobile.errors && (emailOrMobile.valid || emailOrMobile.touched)">
+                        <span *ngIf="emailOrMobile.errors.required">{{message.EmailValidationErrorStatus}}</span>
+                        <!-- <span *ngIf="emailOrMobile.errors.pattern">Email must have email format</span> -->
+                     </div>
+
+                     <div [class.error_input]="password.invalid && password.touched"
+                        class="form-label-group form-input">
+                        <i class="fa fa-eye" [hidden]="!showOrhidePassword" (click)="togglePasswordEye()"
+                           aria-hidden="true"></i>
+                        <i class="fa fa-eye-slash" [hidden]="showOrhidePassword" (click)="togglePasswordEye()"
+                           aria-hidden="true"></i>
+                        <input type={{passwordTextBoxValue}} id="Password" class="form-control" placeholder="Password"
+                           required pattern="^[a-zA-Z0-9@!#.]{8,}$" #password="ngModel"
+                           [(ngModel)]="userSignInModel.password" name="password">
+                        <label for="Password">Password</label>
+                        <div class="underline"></div>
+                     </div>
+                     <div class="error" *ngIf="password.errors && (password.valid || password.touched)">
+                        <span *ngIf="password.errors.required">{{message.PasswordCheck}}</span>
+                        <!-- <span *ngIf="password.errors.pattern">{{message.PasswordPolicyCheck}}</span> -->
+                     </div>
+
+                     <div class="form-group text-right forget">
+                        <a routerLink="/forgot-password" class="ForgetPwd">Forgot Password?</a>
+                     </div>
+
+
+                     <div class="btn_box">
+                        <button type="button" [disabled]="signInForm.invalid" type="submit" class="btn btn-primary">SIGN
+                           IN</button>
+                        <button type="reset" class="btn btn-light">RESET</button>
+                     </div>
+
+                  </form>
+
+                  <div class="footerbtn_box">
+                     <div class="row">
+                        <div class="col-sm-6">
+                           <button type="button" hidden class="btn">Register as Respondent </button>
+                        </div>
+                        <div class="col-sm-6">
+                           <button type="button" hidden class="btn">Respondent Login</button>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</main>

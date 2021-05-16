@@ -1,0 +1,59 @@
+<div
+  class="wrapper"
+  style="
+    background-image: url('../../../assets/img/bg.png');
+    background-size: cover;
+  "
+>
+  <div class="d-flex">
+    <router-outlet name="sidemenu"></router-outlet>
+    <div id="content">
+      <div class="topnavbar-div">
+        <nav class="col-md-6 offset-md-6 top-navbar">
+          <!-- Left navbar links -->
+
+          <ul class="top-navbar-nav">
+            <li class="">
+              <a href="/survey/view-survey"></a>
+            </li>
+          </ul>
+
+          <!-- Left navbar links :: Pagination Content Starts from here  -->
+          <!-- <app-view-survey #viewsurvey></app-view-survey> -->
+          <ul class="navbar-nav">
+            <li class="nav-item d-none d-sm-inline-block widthlenth">
+              <!-- <div class="">
+                <div class="input-group ptop">
+                  <div class="input-group-addon sinput">
+                    <i class="fa fa-search searchicon"></i>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control searchbx"
+                    data-mask=""
+                    placeholder="Search Here"
+                  />
+                </div>
+              </div> -->
+              <mat-paginator
+                [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+              >
+              </mat-paginator>
+            </li>
+          </ul>
+
+          <!-- Right navbar links :: User Icon  -->
+          <div class="cols">
+            <img src="../../../assets/img/user.png" class="usericon" />
+          </div>
+
+          <!-- Right navbar links :: User Icon  -->
+        </nav>
+        <hr style="clear: both" />
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

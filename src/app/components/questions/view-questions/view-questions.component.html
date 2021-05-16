@@ -1,0 +1,114 @@
+<div class="mainbodydiv">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-body padding25">
+					<div class="text-center">
+						<img src="../../../../assets/img/addquestion.png" class="addqueswidth">
+					</div>
+					<div class="">
+						<div class="col-md-9 offset-md-2">
+							<p class="txt">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">Lorem ipsum dolor sit amet, tempor labore
+										sadipscing over the years, and a great idea, but you should work per month
+										exciting Eirmod tempor diam erat, sed diam of the project. </font>
+									<font style="vertical-align: inherit;">But, in truth, two minutes, and just, and
+										feel, and the things to preview them. </font>
+									<font style="vertical-align: inherit;">At vero eos, no hendreri is lorem ipsum
+										carrots. </font>
+									<font style="vertical-align: inherit;">Lorem ipsum dolor sit amet, tempor labore
+										sadipscing over the years, sed diam tempor sed ut labore et dolore magna labore
+										magna per month.</font>
+								</font>
+							</p>
+						</div>
+						<div class="clearfix"></div>
+						<div class="col-md-9 offset-md-2">
+							<button class="btn btn-primary clickbtn" data-toggle="modal" data-target="#myModal">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">Click here to add Questions</font>
+								</font>
+							</button>
+						</div>
+					</div>
+				</div>
+				<!--------end cardbody------->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+
+			<div class="modal-body">
+				<h4 class="modal-title tcenter">Select Question</h4>
+				<div class="row">
+					<div class="col-md-3">
+						<p class="uppercase"> Single Response</p>
+						<p (click)="goToCreateQuestion('RADIO')">
+							<button type="button" class="border0 radiobtn" data-toggle="popover">
+								<img src="../../../../assets/img/radio.png" class="h16"> Radio </button>
+						</p>
+
+						<p (click)="goToCreateQuestion('DROPDOWN_SINGLE')" class="fsize"> <img
+								src="../../../../assets/img/dropdown.png" class="h16"> Dropdown Single</p>
+						<p (click)="goToCreateQuestion('SELECTION_YES_NO')" class="fsize"> <img
+								src="../../../../assets/img/toggle.png" class="h16"> Selection Yes / No</p>
+					</div>
+
+					<div class="col-md-3">
+						<p class="uppercase"> Miscellaneous</p>
+						<p (click)="goToCreateQuestion('RANKING')" class="fsize"> <img src="../../../../assets/img/ranking.png" class="h16"> Ranking</p>
+						<p (click)="goToCreateQuestion('RATING')" class="fsize"> <img src="../../../../assets/img/rating.png" class="h16"> Rating</p>
+						<p (click)="goToCreateQuestion('GROUP_NUMBER')" class="fsize"> <img src="../../../../assets/img/numbers.png" class="h16"> Group Number</p>
+						<p (click)="goToCreateQuestion('CHIP_DISTRIBUTION')" class="fsize"> <img src="../../../../assets/img/distribute.png" class="h16"> Chip Distribution</p>
+						<p class="fsize" (click)="goToCreateQuestion('PLAIN_BANNER')"> <img src="../../../../assets/img/banner.png" class="h16"> Plain Banner</p>
+						<p class="fsize" (click)="goToCreateQuestion('SLIDER')"> <img src="../../../../assets/img/radiobtn.png" class="h16"> Slider </p>
+						<p class="fsize" > <img src="../../../../assets/img/combine.png" class="h16"> Combination </p>
+					</div>
+
+					<div class="col-md-3">
+						<p class="uppercase"> Open Ended</p>
+						<p (click)="goToCreateQuestion('FREE_TEXT_SINGLE_LINE')" class="fsize"> <img src="../../../../assets/img/text.png" class="h16"> Free Text (Single
+							Line)</p>
+						<p (click)="goToCreateQuestion('FREE_TEXT_MULTI_LINE')" class="fsize"> <img src="../../../../assets/img/multiline.png" class="h16"> Free Text (Multi
+							Line)</p>
+						<p (click)="goToCreateQuestion('NUMERICAL')" class="fsize"> <img src="../../../../assets/img/number.png" class="h16"> Numerical</p>
+						<p (click)="goToCreateQuestion('DATE')"class="fsize"> <img src="../../../../assets/img/date.png" class="h16"> Input Date</p>
+					</div>
+
+					<div class="col-md-3">
+						<p class="uppercase"> Grid Que with Matrix</p>
+						<p (click)="goToCreateQuestion('RADIO_BUTTON_SINGLE_SELECTION')" class="fsize"> <img src="../../../../assets/img/radiobtn.png" class="h16"> Radio
+							Button(Single Selection)
+						</p>
+						<p (click)="goToCreateQuestion('CHECKBOX_MULTI_SELECTION')" class="fsize"> <img src="../../../../assets/img/checkbox.png" class="h16"> Checkbox(Multi
+							Selection)</p>
+						<p (click)="goToCreateQuestion('FREE_TEXT_SINGLE_LINE')" class="fsize"> <img src="../../../../assets/img/text.png" class="h16"> Free Text </p>
+						<p (click)="goToCreateQuestion('DROPDOWN')"class="fsize"> <img src="../../../../assets/img/droplist.png" class="h9"> Drop Down </p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 mtop-5">
+						<p class="uppercase"> Grid Que with Matrix</p>
+						<p (click)="goToCreateQuestion('CHECKBOX')"class="fsize"> <img src="../../../../assets/img/check.png" class="h16"> Checkbox</p>
+						<p (click)="goToCreateQuestion('CHECKBOX_WITH_FREE_TEXT')"class="fsize"> <img src="../../../../assets/img/checktxt.png" class="h16"> Checkbox with Free
+							Text </p>
+						<p (click)="goToCreateQuestion('DROPDOWN_MULTIPLE_SELECTION')"class="fsize"> <img src="../../../../assets/img/droptxt.png" class="h16"> Dropdown Multiple
+							Selection </p>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"><br /></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary font13 btnprimary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

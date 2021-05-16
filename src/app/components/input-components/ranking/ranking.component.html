@@ -1,0 +1,43 @@
+<div class="heightautos activecheckbox" *ngFor="let option of option">
+    <button class="btn"><img src="../../../../assets/img/menu.png" /></button>
+    <select class="numberdrop">
+      <option>01</option>
+      <option>02</option>
+      <option>03</option>
+    </select>
+    <input
+      type="text"
+      name="yes"
+      placeholder="Option 1"
+      [value]="option.optionText"
+      class="optionranking chkleft activeinput"
+    />
+    <div class="attached-closesd mtop2">
+      <img
+        src="../../../../assets/img/icon-close.png"
+        class=" btn btn-default attached-closebtn"
+      />
+    </div>
+    <div class="attached-closesd ">
+      <div class="upload-btn-wrapper">
+        <button class="btn borderrt">
+          <img src="../../../../assets/img/attached.png" class="pin" />
+        </button>
+        <input type="file" name="myfile" />
+      </div>
+    </div>
+    <div class="attached-closesd mtop2">
+      <img src="../../../../assets/img/perfume.png" class="perfume-img" />
+      
+    </div>
+    <!---other option---->
+    <div *ngIf="option.otherOptionAvailable">
+      <input
+        type="text"
+        name="yes"
+        placeholder="Option 1"
+        class="optioncheck chkleft activeinput"
+      />
+    </div>
+    <!---other option---->
+  </div>

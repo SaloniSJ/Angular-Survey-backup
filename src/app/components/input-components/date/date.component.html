@@ -1,0 +1,35 @@
+<div class="dflex" *ngFor="let option of option">
+    <div class="heightautos col-md-5">
+      <img src="../../../../assets/img/calendar.png" class="clandrimg" />
+      <input
+        type="text"
+        name="yes"
+        placeholder="Option 1"
+        [value]="option.optionText"
+        class="optionrankings border0"
+      />
+    </div>
+    <div class="col-md-3 colm3">
+      <div class="attached-closesd ">
+        <img
+          src="../../../../assets/img/icon-close.png"
+          class=" btn btn-default attached-closebtn"
+        />
+      </div>
+      <div class="attached-closesd ">
+        <div class="upload-btn-wrapper">
+          <button class="btn borderrt">
+            <img src="../../../../assets/img/attached.png" class="pin" />
+          </button>
+          <input type="file" name="myfile" />
+        </div>
+      </div>
+      <div class="attached-closesd ">
+        <img
+          src="../../../../assets/img/perfume.png"
+          class="perfume-img"
+        />
+        <span class="attachedspan">Image.png</span>
+      </div>
+    </div>
+  </div>

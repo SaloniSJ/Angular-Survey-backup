@@ -1,0 +1,846 @@
+<div *ngFor="let question of question_list; let i=index">
+
+  <div
+    class="mainbodydiv mtop card m0 bradius"
+    *ngIf="is_preview_question_modal_visible"
+  >
+  
+    <div class="header-shadow" >
+      <div class="row">
+        <div class="col-md-5">
+          <div class="dflex">
+            <div class="badge">English <span>×</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 dinline">
+          <div class="col-md-3 col-xs-6 lgn">
+            <div class="dropdown t-right fbold">
+              <select class="selctopt">
+                <option class="opt">English</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="col-md-4 col-xs-5"
+            style="border-right: 1px solid #ddd; text-align: center"
+          >
+            <span class="font13 fbold flex">
+              <label class="contas float-right quesboolen">
+                <input
+                  type="checkbox"
+                  name="isMandatory"
+                  checked="question.isMandatory" />
+                <span class="checkmarkk" style="background: #4caf50"></span
+              ></label>
+              <input
+                type="text"
+                disabled=""
+                placeholder="Mandatory All"
+                class="mandotoryall"
+            /></span>
+          </div>
+          <div
+            class="col-md-2 col-xs-3"
+            style="border-right: 1px solid #ddd; text-align: center">
+            <span class="font13 fbold">
+              <input
+                type="text"
+                checked="question.pageNumber"
+                [value]="question.pageNumber"
+                placeholder="Page 01"
+                class="survey-page-number"
+            /></span>
+          </div>
+          <div class="col-md-4 col-xs-7">
+            <div class="dropdown">
+              <select class="dropoption">
+                <option class="opt">{{question.questionType}}</option>
+              </select>
+              <!-- <input type="text" disabled=""  placeholder="Radio Button" class="question-type-input-box" /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="m4">
+        <div>
+          <div class="row">
+            <div class="col-md-12 paddrl">
+              <!-----form start----->
+              <form class="form">
+                <div class="question-box border0">
+                  <div class="row">
+                    <div class="col-md-8 col-xs-12 inputques">
+                      <div class="row ros">
+                        <div
+                          class="col-md-1 col-xs-4 text-center"
+                          style="padding-right: 0;padding-left:0;"
+                        >
+                          <span class="ques">Q-{{i+1}}</span>
+                        </div>
+                        <div class="col-md-10 col-xs-8" style="padding-left: 0">
+                          <input
+                            type="text"
+                            placeholder="What is Your Favorite Perfume?"
+                            class="inputfield"
+                            [value]=question.questionText
+                          />
+                        </div>
+                        <div class="col-md-12" *ngIf="question.isHavingMultimedia">
+                          <img class="mleft6 imgwidth" src="#" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 float-right">
+                      <span class="mleft2" (click)="editQuestion(question)">
+                        <img
+                          src="../../../../assets/img/edit.png"
+                          class="pinbg"
+                        />
+                      </span>
+                      <span (click)="deleteQuestion(question.questionId,question.languageCode)">
+                        <img
+                          src="../../../../assets/img/delete.png"
+                          class="pinn"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <!-- <div class="selectedimg">
+                    <img src="../../../../assets/img/perfume.png" class="pinn" />
+                  </div> -->
+                </div>
+  
+                <div class="autoscroller">
+                  <!------start div auto scroller-------->
+                  <div class="dflex paddingleft">
+                    <div class="float-left font14">Answer</div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <!-------horizontal------>
+  
+                  <dynamic-form [fields]=question.surveyOptionResponseBeans>
+                  </dynamic-form>
+    
+                  <div class="progress" *ngIf="question.questionType=='CHIP_DISTRIBUTION'">
+                    <div
+                      class="progress-bar progress-bar-success"
+                      role="progressbar"
+                      style="width:40%"
+                    >
+                      Option1 <span class="displaytxt"> (40%) </span>
+                    </div>
+              
+                    <div
+                      class="progress-bar progress-bar-warning"
+                      role="progressbar"
+                      style="width:30%"
+                    >
+                      Option2 <span class="displaytxt"> (30%) </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="row col-md-5 pull-right" *ngIf="is_preview_question_modal_visible">
+    <!-- Left navbar links :: Pagination Content Starts from here  -->
+    <ul class="navbar-nav">
+      <li class="nav-item d-none d-sm-inline-block widthlenth ">
+        <!-- <div class="">
+                          <div class="input-group ptop">
+                              <div class="input-group-addon sinput">
+                                  <i class="fa fa-search searchicon"></i>
+                              </div>
+                              <input type="text" class="form-control searchbx" data-mask=""
+                                  placeholder="Search Here">
+                          </div>
+                         
+                      </div> -->
+        <mat-paginator #paginator
+          [length]="total_elements"
+          [pageSize]="page_size"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          [pageIndex]="page_number"
+        (page)="pageEvent = changePageNumber($event)"
+        >
+        </mat-paginator>
+      </li>
+    </ul>
+</div>
+  <div
+    class="col-md-5 offset-md-3"
+    style="margin-bottom: 2em"
+    *ngIf="is_preview_question_modal_visible"
+  >
+    <button (click)="openModalWindow()" class="btn addques">
+      + Click Here To Add Question
+    </button>
+  </div>
+ 
+  <div
+    class="mainbodydiv mtop card m0 bradius"
+    *ngIf="is_add_question_modal_visible"
+  >
+
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+    <div class="margin0">
+      <div>
+        <form class="form" (submit)="onSubmit()">
+          <div>
+            <div class="header-shadow">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="dflex">
+                    <div class="badge">
+                      {{ questionJSON.languageCode }}<span>&times;</span>
+                    </div>
+                    <!-- <div class="badge">French <span>&times;</span></div> -->
+                  </div>
+                </div>
+                <div class="col-md-5 dinline">
+                  <div class="col-md-4 col-xs-6 lgn">
+                    <div class="dropdown t-right fbold">
+                      <select class="selctopt">
+                        <option
+                          class="opt"
+                          *ngFor="let language of languages"
+                          [value]="questionJSON.languageCode"
+                        >
+                          {{ language }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div
+                    class="col-md-2"
+                    style="border-right: 1px solid #ddd;padding:0px; text-align: center"
+                  >
+                    <span class="font13 fbold"
+                      ><input
+                        type="text"
+                        class="survey-page-numbers"
+                        disabled
+                        placeholder="Page 01"
+                    /></span>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="dropdown" (click)="openModalWindow()">
+                      <input class="dropoption" disabled [value]="question_type" />
+  
+                      <!-- <input type="text" disabled=""  placeholder="Radio Button" class="question-type-input-box" /> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="card-body padding25">
+              <div class="question-box">
+                <!-- <input type="range" class="custom-range" min="0" max="100" name=""> -->
+  
+                <div class="dflexxw">
+                  <div class="col-md-11 inputques col-xs-10">
+                    <textarea
+                      type="text"
+                      name="questionText"
+                      [(ngModel)]="questionJSON.questionText"
+                      placeholder="What is Your Favorite Perfume?"
+                      rows="3"
+                      class="inputfield"
+                    ></textarea>
+                  </div>
+                  <div class="col-md-1 col-xs-2">
+                    <span class="float-right">
+                      <div class="upload-btn-wrapper">
+                        <button class="btn">
+                          <img
+                            src="../../../../assets/img/attached.png"
+                            class="pin"
+                          />
+                        </button>
+                        <input
+                          type="file"
+                          name="questionFile"
+                          #fileInput
+                          accept="image/*"
+                          (change)="showQuestionImagePreview(fileInput.files[0])"
+                        />
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- <div class="col-md-12">
+                    <img [src]="questionImageUrl" class="mleft2 imgwidth" />
+                  </div> -->
+                </div>
+              </div>
+  
+              <div class="m4">
+                <div class="dflex">
+                  <div class="float-left font14">Answer</div>
+                  <div class="col-md-4 offset-md-7 tright">
+                    
+                    <div
+                      id="contactform"
+                      *ngIf="question_type == 'RATING'"
+                      class="slectopt"
+                    >
+                      <select class="ret">
+                        <option
+                          class="opt"
+                          *ngFor="let ro of rating_options"
+                          [value]="questionJSON.icon"
+                        >
+                          {{ ro }}
+                        </option>
+                      </select>
+                    </div>
+                    <div
+                      class="quantity buttons_added"
+                      *ngIf="
+                        question_type == 'RANKING' ||
+                        question_type == 'RATING' ||
+                        question_type == 'SLIDER'
+                      "
+                    >
+                      <span
+                        class="minimspan"
+                        style="float: left; margin-right: 3%"
+                      >
+                        <button
+                          type="button"
+                          class="minus minmaxbtn lheight"
+                          (click)="decreaseThresholdValue()"
+                        >
+                          -
+                        </button>
+  
+                        <!-- number -->
+                        <input
+                          type=""
+                          step="1"
+                          min="1"
+                          max="100"
+                          name="quantity"
+                          [(ngModel)]="questionJSON.threshold"
+                          title="Qty"
+                          class="input-text qty text"
+                          size="100"
+                        />
+                        <input
+                          type="button"
+                          value="+"
+                          class="plus minmaxbtn lheight"
+                          (click)="increaseThresholdValue()"
+                        />
+                      </span>
+                    </div>
+  
+                    <!-- plus icon for adding option starts here and it won't display when option is date/textarea/-->
+                    <div
+                      *ngIf="
+                        !(
+                          question_type == 'BANNER' ||
+                          question_type == 'INPUT_DATE' ||
+                          question_type == 'FREE_TEXT_SINGLE_LINE' ||
+                          question_type == 'FREE_TEXT_MULTI_LINE' ||
+                          question_type == 'NUMERICAL' ||
+                          question_type == 'PLAIN_BANNER' ||
+                          question_type == 'SELECTION_YES_NO'
+                        )
+                      "
+                      (click)="addOptions()"
+                      class="float-right"
+                    >
+                      <img src="../../../../assets/img/plus.png" class="h26" />
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="clearfix"></div>
+                <!-- Rating  starts here-->
+  
+                <div class="clearfix"></div>
+                <!-- Rating ends here -->
+                <div  *ngIf="question_type == 'SELECTION_YES_NO'">
+                 
+                      
+                  <div *ngFor="let option of options; let i = index">
+                        <div class="heightautos actives">
+                          <div class="row listattch listrow">
+                            <div class="col-md-9 heightbx">
+                              <label for="super-happy2 thumbup">
+                                <input
+                                  type="radio"
+                                  name="rating"
+                                  class="super-happy"
+                                  id="super-happy2"
+                                  value="super-happy2"
+                                  checked=""
+                                />
+                                <svg
+                                  width="54px"
+                                  height="54px"
+                                  viewBox="0 0 20 24"
+                                >
+                                  <path
+                                    d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z"
+                                  ></path>
+                                </svg>
+                              </label>
+                              <input
+                                type="text"
+                                [(ngModel)]="option.option_value"
+                                name="option_value_{{ option.id }}"
+                                name="yes"
+                                placeholder="Yes"
+                                class="optionranking actives"
+                              />
+                            </div>
+                            <!-- Image display Option starts here -->
+                            <div class="col-md-3 colmd3right flx">
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/icon-close.png"
+                                  class="btn btn-default attached-closebtn transc"
+                                />
+                              </div>
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/add.png"
+                                  class="btn btn-default attached-btn transc"
+                                />
+                              </div>
+                              <div class="attached-pins">
+                                <div class="upload-btn-wrapper">
+                                  <button class="btn borderright transc">
+                                    <img
+                                      src="../../../../assets/img/attached.png"
+                                      class="pin"
+                                    />
+                                  </button>
+                                  <input type="file" name="option_image_file_0" />
+                                </div>
+                              </div>
+                              <!-- Image display Option ends here -->
+  
+                              <!-- Icons of selecting-image/add-other-option/close-option starts here -->
+  
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/perfume.PNG"
+                                  class="perfume-img"
+                                />
+                                <!-- <span class="font13">image1.png</span> -->
+                              </div>
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/zoom.png"
+                                  class="zoom"
+                                />
+                              </div>
+                            </div>
+  
+                          </div>
+                        </div>
+  
+                        <div class="heightautos">
+                          <div class="row listattch listrow">
+                            <div class="col-md-9 heightbx">
+                              <label for="super-sad3 thumbup">
+                                <input
+                                  type="radio"
+                                  name="rating"
+                                  class="super-sad"
+                                  id="super-sad3"
+                                  value="super-sad3"
+                                />
+                                <svg
+                                  width="54px"
+                                  height="54px"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z"
+                                  ></path>
+                                </svg>
+                              </label>
+                              <input
+                                type="text"
+                                 [(ngModel)]="option.option_value"
+                                name="option_value_{{ option.id }}"
+                                placeholder="No"
+                                class="optionranking"
+                              />
+                            </div>
+                            <!-- Image display Option starts here -->
+                            <div class="col-md-3 colmd3right">
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/icon-close.png"
+                                  class="btn btn-default attached-closebtn transc"
+                                />
+                              </div>
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/add.png"
+                                  class="btn btn-default attached-btn transc"
+                                />
+                              </div>
+                              <div class="attached-pins">
+                                <div class="upload-btn-wrapper">
+                                  <button class="btn borderright transc">
+                                    <img
+                                      src="../../../../assets/img/attached.png"
+                                      class="pin"
+                                    />
+                                  </button>
+                                  <input type="file" />
+                                </div>
+                              </div>
+                              <!-- Image display Option ends here -->
+  
+                              <!-- Icons of selecting-image/add-other-option/close-option starts here -->
+  
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/perfume.PNG"
+                                  class="perfume-img"
+                                />
+                                <!-- <span class="font13">image1.png</span> -->
+                              </div>
+                              <div class="attached-pins">
+                                <img
+                                  src="../../../../assets/img/zoom.png"
+                                  class="zoom"
+                                />
+                              </div>
+                            </div>
+                          </div>
+  
+                      </div>
+                </div>
+              </div>
+  
+              <div *ngIf="!(question_type == 'SELECTION_YES_NO')">
+                <div
+                  class="heightauto"
+                  *ngFor="let option of options; let i = index"
+                >
+                  <div class="row listattch listrow">
+                    <div class="col-md-9 heightbx">
+                      <!-- FOR Cumulative distribution/ Group number-->
+                      <span
+                        *ngIf="
+                          question_type == 'CUMULATIVE_DISTRIBUTION' ||
+                          question_type == 'GROUP_NUMBER'
+                        "
+                        class="persymcss"
+                        >%</span
+                      >
+                      <label  *ngIf="question_type == 'RADIO'" class="contatradio mradio">
+                        <input
+                       
+                        class="opt1 rds"
+                        name="radio"
+                        type="radio"
+                      />
+                        <span class="checkmarkrd"></span>
+                      </label>
+                      <!-- FOR SIMPLE RADIO BUTTON -->                      
+                      
+  
+                      <!-- CHECKBOX/CHECKBOX-FREETEXT/DROPDOWN-SINGLE-SELECT/DROPDOWN-MULTISELECT -->
+                      <div
+                        class="chkbox"
+                        *ngIf="
+                          question_type == 'RADIO' ||
+                          question_type == 'CHECKBOX' ||
+                          question_type == 'CHECKBOX_WITH_FREE_TEXT' ||
+                          question_type == 'DROPDOWN_SINGLE' ||
+                          question_type == 'DROPDOWN_MULTI_SELECT' ||
+                          question_type == 'RANKING' ||
+                          question_type == 'RATING' ||
+                          question_type == 'SLIDER' ||
+                          question_type == 'CHIP_DISTRIBUTION'
+                        "
+                      >
+                        <label class="contas checkboxleft mtops5"
+                          >.
+                          <input type="checkbox" checked="checked" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+  
+                      <input
+                        *ngIf="
+                          question_type == 'CHECKBOX' ||
+                          question_type == 'GROUP_NUMBER' ||
+                          question_type == 'CHECKBOX_WITH_FREE_TEXT' ||
+                          question_type == 'DROPDOWN_SINGLE' ||
+                          question_type == 'DROPDOWN_MULTI_SELECT' ||
+                         
+                          question_type == 'RANKING' ||
+                          question_type == 'RATING' ||
+                          question_type == 'SLIDER' ||
+                          question_type == 'CHIP_DISTRIBUTION'
+                        "
+                        type="text"
+                        name="yes"
+                        [(ngModel)]="option.option_value"
+                        name="option_value_{{ option.id }}"
+                        placeholder="Option {{ option.id }}"
+                        class="optionborder"
+                        style="height: 40px"
+                      />
+  
+                      <!-- Option type = "Textarea"/"Long-text"/"Short-text" -->
+                      <textarea
+                        *ngIf="
+                          question_type == 'FREE_TEXT_MULTI_LINE'
+                        "
+                        type="text"
+                        rows="5"
+                        [(ngModel)]="option.option_value"
+                        name="option_value_{{ option.id }}"
+                        placeholder="Option {{ option.id }}"
+                        class="optionborder chklefts"
+                      ></textarea>
+
+                      <textarea
+                        *ngIf="
+                          question_type == 'FREE_TEXT_SINGLE_LINE'
+                        "
+                        type="text"
+                        rows="2"
+                        [(ngModel)]="option.option_value"
+                        name="option_value_{{ option.id }}"
+                        placeholder="Option {{ option.id }}"
+                        class="optionborder chklefts"
+                      ></textarea>
+  
+                      <!-- Option type=="Number" -->
+                      <input
+                        *ngIf="question_type == 'NUMERICAL'"
+                        type="number"
+                        name="yes"
+                        [(ngModel)]="option.option_value"
+                        name="option_value_{{ option.id }}"
+                        placeholder="Option {{ option.id }}"
+                        class="optionborder"
+                      />
+  
+                      <!-- Option type = "Date" -->
+                      <span *ngIf="question_type == 'INPUT_DATE'" class="persymcss"
+                        ><img src="../../../../assets/img/calendar.png"
+                      /></span>
+                      <input
+                        *ngIf="question_type == 'INPUT_DATE'"
+                        type="text"
+                        name="dateOption"
+                        bsDatepicker
+                        (keydown.Tab)="dp.toggle()"
+                        [(ngModel)]="option.option_value"
+                        name="option_value_{{ option.id }}"
+                        placeholder="Option {{ option.id }}"
+                        class="optionborder"
+                        placeholder="dd/mm/yyyy"
+                        id="survey_end_date"
+                        [bsConfig]="{
+                          dateInputFormat: 'DD-MM-YYYY',
+                          containerClass: 'theme-dark-blue'
+                        }"
+                        #dp="bsDatepicker"
+                        required
+                      />
+  
+                      <div *ngIf="question_type == 'PLAIN_BANNER'"></div>
+                    </div>
+  
+                    <!-- Image display Option starts here -->
+                    <div class="col-md-3 colmd3right">
+                      <div class="attached-pins" (click)="openImageModalWindow(option.option_image_url)">
+                        <img src="../../../../assets/img/zoom.png" class="zoom" />
+                      </div>
+                      <div class="attached-pins">
+                        <img
+                          [src]="option.option_image_url"
+                          class="perfume-img"
+                        />
+                        <!-- <span class="font13">image1.png</span> -->
+                      </div>
+                      <!-- Image display Option ends here -->
+  
+                      <!-- Icons of selecting-image/add-other-option/close-option starts here -->
+  
+                      <div class="attached-pins">
+                        <div class="upload-btn-wrapper">
+                          <button class="btn borderright">
+                            <img
+                              src="../../../../assets/img/attached.png"
+                              class="pin"
+                            />
+                          </button>
+                          <input
+                            type="file"
+                            name="option_image_file_{{ i }}"
+                            #fileinput
+                            (change)="
+                              showOptionImagePreview(i, fileinput.files[0])
+                            "
+                          />
+                        </div>
+                      </div>
+  
+                      <div class="attached-pins" (click)="addOtherOption(i)">
+                        <img
+                          src="../../../../assets/img/add.png"
+                          class="btn btn-default attached-btn"
+                        />
+                      </div>
+  
+                      <div class="attached-pins" (click)="removeOption(i)">
+                        <img
+                          src="../../../../assets/img/icon-close.png"
+                          class="btn btn-default attached-closebtn"
+                        />
+                      </div>
+                    </div>
+                    <!-- Icons of selecting-image/add-other-option/close-option ends here -->
+                  </div>
+  
+                  <!-- Other Options starts from here -->
+                  <div class="row" *ngIf="option.other_option_available">
+                    <div class="additinal">
+                      <input
+                        type="text"
+                        class="opt3 chkleft"
+                        name="yes"
+                        disabled
+                        placeholder="Other Option is for user"
+                      />
+                      <div class="attached-closes mclose">
+                        <img
+                          src="../../../../assets/img/icon-close.png"
+                          class="btn btn-default attached-closebtn"
+                          (click)="removeOtherOption(i)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Other Options ends here. -->
+                </div>
+  
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--------end cardbody------->
+  
+          <div class="row mtop3">
+            <div class="col-md-2 colmd2 mleft2">
+              <div class="form-group">
+                <span class="font14">Option display</span>
+                <div class="optionbox font14">
+                  <span *ngIf="questionJSON.isVertical">vertical</span>
+                  <span *ngIf="questionJSON.isHorizontal">Horizontal</span>
+                  <label class="contaverticle">
+                    <input
+                      type="checkbox"
+                      (click)="handleOptionCss('Horizontal')"
+                      name="isHorizontal"
+                      [(ngModel)]="questionJSON.isHorizontal"
+                      checked="{{ questionJSON.isHorizontal }}"
+                    />
+                    <span class="checkmarkverticle"></span>
+                  </label>
+                  <label class="contahorizontal">
+                    <input
+                      type="checkbox"
+                      (click)="handleOptionCss('Vertical')"
+                      name="isVertical"
+                      [(ngModel)]="questionJSON.isVertical"
+                      checked="{{ questionJSON.isVertical }}"
+                    />
+                    <span class="checkmarkhorizontal"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 colmd2 font14">
+              <div class="form-group">
+                <span class="optionlabel font14">Question Mandatory</span>
+                <div class="optionbox">
+                  <span
+                    *ngIf="questionJSON.isMandatory"
+                    class="optionlabel font14"
+                    >Yes</span
+                  >
+                  <span
+                    *ngIf="!questionJSON.isMandatory"
+                    class="optionlabel font14"
+                    >No</span
+                  >
+                  <label class="contas float-right quesboolen">
+                    <input
+                      type="checkbox"
+                      name="isMandatory"
+                      [(ngModel)]="questionJSON.isMandatory"
+                      checked="questionJSON.isMandatory"
+                    />
+                    <span class="checkmarkk"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 colmd2">
+              <div class="form-group">
+                <span class="optionlabel font14">Randomize Option</span>
+                <div class="optionbox2">
+                  <select
+                    class="form-control border0 font14"
+                    name="isRandomized"
+                    [(ngModel)]="questionJSON.isRandomized"
+                  >
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 colmd4 mleft8">
+              <span><br /></span>
+  
+              <button class="btn border-blue font13 h41 mright6 col-md-7 col-xs-12">
+                <!-- <img src="../../../../assets/img/preview.png" class="previewheight" /> -->
+                +Add Page
+              </button>
+  
+              <button class="btn btn-primary font13 btnprimary h41  col-md-4 col-xs-12" type="submit">
+                Save
+              </button>
+            </div>
+  
+            <!-- <div class="col-md-1 colmd1">
+              <span><br /></span>
+              <button class="btn btn-default">
+                <img src="../../../../assets/img/delete.png" class="del" />
+              </button>
+            </div> -->
+            <div class="clearfix"></div>
+            <!-- <div class="hr"></div> -->
+           
+          </div>
+        </form>
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </div>

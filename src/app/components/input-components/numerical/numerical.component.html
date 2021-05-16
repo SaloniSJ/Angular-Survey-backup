@@ -1,0 +1,39 @@
+<div class="dflex" *ngFor="let option of option">
+    <div class="heightautos col-md-5">
+      <input
+        type="text"
+        name="yes"
+        placeholder="Type Number"
+        class="optionranking"
+        [value]="option.optionText"
+      />
+    </div>
+    <div class="col-md-3 colm3">
+      <div class="attached-closesd ">
+        <img
+          src="../../../../assets/img/icon-close.png'}"
+          class=" btn btn-default attached-closebtn"
+        />
+      </div>
+      <div class="attached-closesd ">
+        <div class="upload-btn-wrapper">
+          <button class="btn borderrt">
+            <img src="../../../../assets/img/attached.png" class="pin" />
+          </button>
+          <input type="file" name="myfile" />
+        </div>
+      </div>
+      <div class="attached-closesd ">
+        <img src="../../../../assets/img/perfume.png'}" class="perfume-img" />
+       
+      </div>
+    </div>
+    <div *ngIf="option.otherOptionAvailable">
+      <input 
+        type="text"
+        placeholder="Other Option "
+        class="optioncheck chkleft"
+      />
+    </div>
+
+  </div>

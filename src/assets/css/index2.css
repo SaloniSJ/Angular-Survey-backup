@@ -1,0 +1,38 @@
+﻿body {overflow: inherit;}
+
+.form_box h1 {
+position:relative;
+}
+
+.form_box h1 > span{ 
+	position: absolute;
+	right: 0;
+	color: #dcdbdb;
+	
+}
+
+.form-input > .fa-mobile {
+font-size: 27px;
+right: 13px;
+}
+ 
+.footerbtn_box {
+margin-top: 70px;
+margin-bottom: 40px;
+}
+ 
+@media screen and (max-width: 1336px) {
+ 
+}
+
+@media screen and (max-width: 1024px) {
+ 
+}
+
+@media screen and (max-width: 769px) {
+ 
+}
+
+@media screen and (max-width: 600px) {
+ 
+}

@@ -1,0 +1,50 @@
+<div class="heightautos" *ngFor="let option of option">
+    <input
+      type="text"
+      name="yes"
+      placeholder="Option 1"
+      class="optionranking"
+      [value]="option.optionText"
+    />
+
+    <div class="attached-closesd mtop2">
+      <img
+        src="../../../../assets/img/icon-close.png"
+        class=" btn btn-default attached-closebtn"
+      />
+    </div>
+
+    <div class="attached-closesd ">
+      <div class="upload-btn-wrapper">
+        <button class="btn borderrt">
+          <img src="../../../../assets/img/attached.png" class="pin" />
+        </button>
+        <input type="file" name="myfile" />
+      </div>
+    </div>
+
+    <div class="attached-closesd mtop2">
+      <img src="../../../../assets/img/perfume.png" class="perfume-img" />
+    </div>
+
+    <div class="attached-closesd w20">
+      <button class="btn">
+        <img src="../../../../assets/img/uparrow.png" class="arrow20" />
+      </button>
+      <input type="text" placeholder="25%" class="inputplc" />
+      <button class="btn">
+        <img src="../../../../assets/img/droparrow.png" class="arrow20" />
+      </button>
+    </div>
+
+    <!---other option---->
+    <div *ngIf="option.otherOptionAvailable">
+      <input
+        type="text"
+        name="yes"
+        placeholder="Option"
+        class="optioncheck chkleft"
+      />
+    </div>
+    <!---other option---->
+  </div>

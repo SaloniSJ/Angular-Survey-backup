@@ -1,0 +1,131 @@
+
+  <div class="mainbodydiv mtop viewcontents">
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="timer"
+      [fullScreen]="true"
+      ><p style="color: white">Loading...</p></ngx-spinner
+    >
+    <div class="row">
+      <div class="col-md-12">
+        <div
+          class="card card1 m0 cardbottom"
+          *ngFor="let survey of survey_list"
+        >
+          <div class="card-body padding8 greens">
+            <div class="row">
+              <table style="width: 100%"></table>
+              <table>
+                <tbody>
+                  <tr>
+                    <div *ngIf="survey.surveyLogoUrl; else elseBlock">
+                      <td rowspan="2">
+                        <img [src]="survey.surveyLogoUrl" class="img-icon" />
+                      </td>
+                    </div>
+                    <ng-template #elseBlock
+                      ><td rowspan="2">
+                        <img
+                          src="../../../../assets/img/Monsta.jpg"
+                          class="img-icon"
+                        /></td
+                    ></ng-template>
+                  </tr>
+                </tbody>
+              </table>
+              <table
+                class="w89 tableresponsive"
+                (click)="navigateToCreateQuestion(survey)"
+              >
+                <tbody>
+                  <tr>
+                    <td colspan="7" class="bottom fnt17">
+                      <b>{{ survey.surveyName }} </b>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="deactivate valign">{{ survey.surveyStatus }}</td>
+                    <td class="w12">
+                      <span class="count">0 </span>
+                      <p class="conttxt">Count</p>
+                    </td>
+                    <td class="w30">
+                      <b class="lineheight">{{ survey.surveyExpireDate }}</b>
+                      <p class="conttxt">Expire Date</p>
+                    </td>
+                    <td class="tcenter">
+                      <i class="fa fa-map-marker fa-15x track"></i>
+                      <p class="fnt13 conttxt">Track</p>
+                    </td>
+                    <td class="tcenter">
+                      <i class="fa fa-line-chart fa-15x analysis"></i>
+                      <p class="fnt13 conttxt">Analysis</p>
+                    </td>
+                    <td class="tcenter">
+                      <i class="fa fa-list fa-15x responses"></i>
+                      <p class="fnt13 conttxt">Responses</p>
+                    </td>
+                    <td class="tcenter">
+                      <i class="fa fa-cloud-download fa-15x export"></i>
+                      <p class="fnt13 conttxt">Export</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- <div class="card card1 m0 cardbottom">
+                <div class="card-body padding8 greenlisting greens" *ngFor="let list of survey_list">
+                    <div class="row">
+                        <table style="width:100%;">
+                        </table>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2"><img src="../../../../assets/images/survey-img/default.png" class="img-icon"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="w89">
+                            <tbody>
+                                <tr>
+                                    <td colspan="7" class="bottom"><b>Lorem ipsum dolor sit amet, consetetur sadipscing
+                                            elitr, sed dialabo dolo ore et dolore magna aliquyam erat. </b></td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="activate valign1">Active</td>
+                                    <td class="w12"><span class="count">234 </span>
+                                        <p class="conttxt">Count</p>
+                                    </td>
+                                    <td class="w30"><b class="lineheight">26 Sept 2020 </b>
+                                        <p class="conttxt">Expire Date</p>
+                                    </td>
+                                    <td class="tcenter"><i class="fa fa-map-marker fa-15x track"></i>
+                                        <p class="fnt13">Track</p>
+                                    </td>
+                                    <td class="tcenter"><i class="fa fa-line-chart fa-15x analysis"></i>
+                                        <p class="fnt13">Analysis</p>
+                                    </td>
+                                    <td class="tcenter"><i class="fa fa-list fa-15x responses"></i>
+                                        <p class="fnt13">Responses</p>
+                                    </td>
+                                    <td class="tcenter"><i class="fa fa-cloud-download fa-15x export"></i>
+                                        <p class="fnt13">Export</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </div>
+

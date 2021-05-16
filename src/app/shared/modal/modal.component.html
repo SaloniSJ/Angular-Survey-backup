@@ -1,0 +1,78 @@
+<div *ngIf="data.image; else elseBlock">
+	
+	  <img [src]="data.image_url" />
+	
+  </div>
+  <ng-template #elseBlock>
+<ol>
+	<li>
+		<h4 class="modal-title tcenter">Select Question</h4>
+		<div class="row">
+			<div class="col-md-3">
+				
+				<p class="uppercase"> Single Response</p>
+				<p  [mat-dialog-close]='data.questionTypeList[0]'>
+					<button type="button" class="border0 radiobtn" data-toggle="popover">
+						<img src="../../../../assets/img/radio.png" class="h16"> Radio </button>
+				</p>
+
+				<p [mat-dialog-close]='data.questionTypeList[1]' class="fsize"> <img
+						src="../../../../assets/img/dropdown.png" class="h16"> Dropdown Single</p>
+				<p [mat-dialog-close]='data.questionTypeList[2]' class="fsize"> <img
+						src="../../../../assets/img/toggle.png" class="h16"> Selection Yes / No</p>
+			</div>
+
+			<div class="col-md-3">
+				<p class="uppercase"> Miscellaneous</p>
+				<p [mat-dialog-close]='data.questionTypeList[3]' class="fsize"> <img src="../../../../assets/img/ranking.png" class="h16"> Ranking</p>
+				<p [mat-dialog-close]='data.questionTypeList[4]' class="fsize"> <img src="../../../../assets/img/rating.png" class="h16"> Rating</p>
+				<p [mat-dialog-close]='data.questionTypeList[5]' class="fsize"> <img src="../../../../assets/img/numbers.png" class="h16"> Group Number</p>
+				<p [mat-dialog-close]='data.questionTypeList[6]' class="fsize"> <img src="../../../../assets/img/distribute.png" class="h16"> Chip Distribution</p>
+				<p class="fsize" [mat-dialog-close]='data.questionTypeList[7]'> <img src="../../../../assets/img/banner.png" class="h16"> Plain Banner</p>
+				<p class="fsize" [mat-dialog-close]='data.questionTypeList[8]'> <img src="../../../../assets/img/radiobtn.png" class="h16"> Slider </p>
+				<p class="fsize" [mat-dialog-close]='data.questionTypeList[9]'> <img src="../../../../assets/img/combine.png" class="h16"> Combination </p>
+			</div>
+
+			<div class="col-md-3">
+				<p class="uppercase"> Open Ended</p>
+				<p [mat-dialog-close]='data.questionTypeList[10]' class="fsize"> <img src="../../../../assets/img/text.png" class="h16"> Free Text (Single
+					Line)</p>
+				<p [mat-dialog-close]='data.questionTypeList[11]' class="fsize"> <img src="../../../../assets/img/multiline.png" class="h16"> Free Text (Multi
+					Line)</p>
+				<p [mat-dialog-close]='data.questionTypeList[12]' class="fsize"> <img src="../../../../assets/img/number.png" class="h16"> Numerical</p>
+				<p [mat-dialog-close]='data.questionTypeList[13]' class="fsize"> <img src="../../../../assets/img/date.png" class="h16"> Input Date</p>
+			</div>
+
+			<div class="col-md-3">
+				<p class="uppercase"> Grid Que with Matrix</p>
+				<p [mat-dialog-close]='data.questionTypeList[14]' class="fsize"> <img src="../../../../assets/img/radiobtn.png" class="h16"> Radio
+					Button(Single Selection)
+				</p>
+				<p [mat-dialog-close]='data.questionTypeList[15]' class="fsize"> <img src="../../../../assets/img/checkbox.png" class="h16"> Checkbox(Multi
+					Selection)</p>
+				<p [mat-dialog-close]='data.questionTypeList[16]' class="h16"> <img src="../../../../assets/img/check.png" class="h16"/> CHECKBOX </p>
+				<p [mat-dialog-close]='data.questionTypeList[17]' class="fsize"> <img src="../../../../assets/img/droplist.png" class="h9"> Drop Down </p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 mtop-5">
+				<p class="uppercase"> Grid Que with Matrix</p>
+				<!-- <p (click)="goToCreateQuestion('CHECKBOX')"class="fsize"> <img src="../../../../assets/img/check.png" class="h16"> Checkbox</p> -->
+				<p [mat-dialog-close]='data.questionTypeList[18]' class="h16"> <img src="../../../../assets/img/check.png" class="h16"/> Checkbox with Free
+					Text </p>
+				<p [mat-dialog-close]='data.questionTypeList[19]' class="fsize"> <img src="../../../../assets/img/droptxt.png" class="h16"> Dropdown Multiple
+					Selection </p>
+			</div>
+		</div>
+	
+	<div class="clearfix"><br /></div>
+	
+	</li>
+	
+  </ol>
+
+</ng-template>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary font13 btnprimary" [mat-dialog-close]>Close</button>
+</div>

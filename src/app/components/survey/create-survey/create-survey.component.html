@@ -1,0 +1,251 @@
+<div class="mainbodydiv mtop">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card m0 bradius">
+        <div class="col-md-4 offset-md-8">
+          <div class="activebtn">
+            <label class="box"
+              >Active
+              <input
+                type="radio"
+                checked="survey.isSurveyActive"
+                (change)="changeSurveyStatus('Active')"
+                name="radio"
+              />
+              <span class="mark"></span>
+            </label>
+            <span>|</span>
+            <label class="box"
+              >Deactive
+              <input
+                type="radio"
+                name="radio"
+                (change)="changeSurveyStatus('Deactive')"
+                checked="survey.isSurveyDeactive"
+              />
+              <span class="mark"></span>
+            </label>
+          </div>
+        </div>
+        <div class="card-body padding25">
+          <ngx-spinner
+            bdColor="rgba(0, 0, 0, 0.8)"
+            size="medium"
+            color="#fff"
+            type="timer"
+            [fullScreen]="true"
+            ><p style="color: white">Loading...</p></ngx-spinner
+          >
+
+          <div class="text-center">
+            <!-- Upload  -->
+            <form
+              #createSurveyForm="ngForm"
+              (ngSubmit)="createSurvey()"
+              novalidate
+            >
+              <div class="file-upload">
+                <div class="image-upload-wrap">
+                  <div class="divimg" *ngIf="imageUrl; else elseBlock">
+                    <img
+                      class="file-upload-image"
+                      [src]="imageUrl"
+                      alt="your image"
+                    />
+                  </div>
+                  <ng-template #elseBlock>
+                    <div class="divimg">
+                      <img
+                        src="../../../../assets/img/Monsta.jpg"
+                        class="img-icon"
+                      /></div
+                  ></ng-template>
+                  <div class="divinput">
+                    <input
+                      class="file-upload-input"
+                      type="file"
+                      name="file"
+                      #fileInput
+                      accept="image/*"
+                      (change)="showPreview(fileInput.files[0])"
+                    />
+                  </div>
+                  <div class="drag-text txtlabel">
+                    <label class="margin7top"></label><br />
+                    <b class="btn btn-primary">select Image</b>
+                  </div>
+                  <div id="start">
+                    <img
+                      src="../../../../assets/img/camera.png"
+                      class="uploadimg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="col-md-6 offset-md-3 flex-bottom2">
+                <div
+                  [class.error_input]="
+                    survey_name.invalid && survey_name.touched
+                  "
+                  class="form-group"
+                >
+                  <div class="tleft">
+                    <label>Survey Name</label>
+                  </div>
+                  <input
+                    type="text"
+                    id="survey_name"
+                    name="survey_name"
+                    #survey_name="ngModel"
+                    [(ngModel)]="survey.survey_name"
+                    class="form-control"
+                    placeholder="Survey name"
+                  />
+                </div>
+                <div class="error">
+                  <span
+                    [class.d-none]="survey_name.valid || survey_name.untouched"
+                    >Survey name is mandatory</span
+                  >
+                </div>
+              </div>
+
+              <div class="row flex-bottom">
+                <div class="col-md-3">
+                  <label class="lbl">Gps Location Mandatory</label>
+                </div>
+                <div class="col-md-2 flex-bottom">
+                  <div class="can-toggle demo-rebrand-2">
+                    <input
+                      id="e"
+                      type="checkbox"
+                      #gps_location_mandatory="ngModel"
+                      [(ngModel)]="survey.gps_location_mandatory"
+                      name="gps_location_mandatory"
+                    />
+                    <label for="e">
+                      <div
+                        class="can-toggle__switch"
+                        data-checked="ON"
+                        data-unchecked="OFF"
+                      ></div>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-md-3 offset-md-1">
+                  <label class="lbl">Network time Mandatory</label>
+                </div>
+                <div class="col-md-2">
+                  <div class="can-toggle demo-rebrand-2">
+                    <input
+                      id="ee"
+                      type="checkbox"
+                      #network_time_mandatory="ngModel"
+                      [(ngModel)]="survey.network_time_mandatory"
+                      name="network_time_mandatory"
+                    />
+                    <label for="ee">
+                      <div
+                        class="can-toggle__switch"
+                        data-checked="ON"
+                        data-unchecked="OFF"
+                      ></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row tleft mleft2">
+                <div class="col-md-4">
+                  <label class="colorblue">Survey Create Date</label>
+                </div>
+              </div>
+              <div class="row flex-bottom mleft2">
+                <div
+                  [class.error_input]="
+                    survey_create_date.invalid && survey_create_date.touched
+                  "
+                  class="col-md-5 flex-bottom"
+                >
+                  <input
+                    type="text"
+                    #survey_create_date="ngModel"
+                    bsDatepicker
+                    [(ngModel)]="survey.survey_create_date"
+                    name="survey_create_date"
+                    (keydown.Tab)="dp.toggle()"
+                    placeholder="dd/mm/yyyy"
+                    id="survey_create_date"
+                    [bsConfig]="{
+                      dateInputFormat: 'DD-MM-YYYY',
+                      containerClass: 'theme-dark-blue'
+                    }"
+                    #dp="bsDatepicker"
+                    required
+                    class="form-control"
+                    placement="top"
+                    [minDate]="minDate"
+                  />
+                  <div class="error">
+                    <span
+                      [class.d-none]="
+                        survey_create_date.valid || survey_create_date.untouched
+                      "
+                      >Survey create date is mandatory</span
+                    >
+                  </div>
+                </div>
+                <div
+                  [class.error_input]="
+                    survey_end_date.invalid && survey_end_date.touched
+                  "
+                  class="offset-md-1 col-md-5"
+                >
+                  <input
+                    type="text"
+                    #survey_end_date="ngModel"
+                    name="survey_end_date"
+                    [minDate]="minDate"
+                    [(ngModel)]="survey.survey_end_date"
+                    bsDatepicker
+                    (keydown.Tab)="dp.toggle()"
+                    placeholder="dd/mm/yyyy"
+                    id="survey_end_date"
+                    [bsConfig]="{
+                      dateInputFormat: 'DD-MM-YYYY',
+                      containerClass: 'theme-dark-blue',
+                      isAnimates:'true'
+                    }"
+                    #dp="bsDatepicker"
+                    required
+                    class="form-control"
+                    placement="top"
+                  />
+                  <div class="error">
+                    <span
+                      [class.d-none]="
+                        survey_end_date.valid || survey_end_date.untouched
+                      "
+                      >Survey end date is mandatory</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="row flex-bottom float-right">
+                <div class="col-6">
+                  <button class="btn btn-primary btn-primary1">Cancel</button>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-primary btnprimary">Next</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

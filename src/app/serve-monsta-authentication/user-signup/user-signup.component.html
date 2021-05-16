@@ -1,0 +1,188 @@
+<div class="container-fluid">
+  
+  <div class="row">
+    <div class="moblogo_box">
+      <img src="../../../assets/images/logo.png" alt="" class="img-responsive">
+    </div>
+
+    <div class="col-md-12 col-lg-6 pad0">
+      <div class="main_img">
+
+        <img src="../../../assets/images/MaskGroup2.png" alt="" class="img-responsive desktop_img">
+        <img src="../../../assets/images/mob_img1.png" alt="" class="img-responsive mob_img">
+      </div>
+      <div class="logo_box">
+        <img src="../../../assets/images/logo.png" alt="" class="img-responsive">
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6">
+      <div class="center_box signup">
+
+
+        <div class="form_box">
+          <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer"><p style="color: white" > Loading... </p></ngx-spinner>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin: 10px;"
+            *ngIf="errorMsg">
+            <strong> {{errorMsg}} </strong>
+            <button type="button" class="close" data-dismiss="alert" (click)="closeAlert()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <h1 routerLink="/signin" class="title active">Login</h1>
+          <h1 class="title">Sign Up</h1>
+
+          <form id="form" #signUpForm="ngForm" (ngSubmit)="signup()" novalidate>
+
+            <div [class.error_input]="name.invalid && name.touched" class="form-label-group form-input">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <input type="email" id="name" class="form-control" placeholder="John" autofocus #name="ngModel"
+                name="name" [(ngModel)]="userSignUpModel.name" required>
+              <label for="name">Name</label>
+              <div class="underline"></div>
+            </div>
+
+            <div class="error">
+              <span [class.d-none]="name.valid || name.untouched">{{message.NameCheck}}</span>
+            </div>
+
+            <div [class.error_input]="emailId.invalid && emailId.touched" class="form-label-group form-input">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input type="email" id="inputEmail" class="form-control" placeholder="John@abc.com" #emailId="ngModel"
+                [(ngModel)]="userSignUpModel.emailId" name="emailId" required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+              <label for="inputEmail">Email address</label>
+              <div class="underline"></div>
+            </div>
+
+            <div class="error" *ngIf="emailId.errors && (emailId.valid || emailId.touched)">
+              <span *ngIf="emailId.errors.required">{{message.EmailValidationErrorStatus}}</span>
+              <span *ngIf="emailId.errors.pattern">{{message.EmailFormatCheck}}</span>
+            </div>
+
+            <div [class.error_input]="mobileNumber.invalid && mobileNumber.touched" class="form-label-group form-input">
+              <i class="fa fa-mobile" aria-hidden="true"></i>
+              <input type="email" id="mobile" class="form-control" placeholder="9090909090" #mobileNumber="ngModel"
+                [(ngModel)]="userSignUpModel.mobileNumber" name="mobileNumber" required pattern="(?<!\d)\d{10}(?!\d)">
+              <label for="mobile">Mobile number</label>
+              <div class="underline"></div>
+            </div>
+            <div class="error" *ngIf="mobileNumber.errors && (mobileNumber.valid || mobileNumber.touched)">
+              <span *ngIf="mobileNumber.errors.required">{{message.MobileNumberCheck}}</span>
+              <span *ngIf="mobileNumber.errors.pattern">{{message.MobilePolicyCheck}}</span>
+            </div>
+
+            <div [class.error_input]="dateOfBirth.invalid && dateOfBirth.touched" class="form-label-group form-input">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <input id="datepicker" class="form-control" name="dateOfBirth" #dateOfBirth="ngModel"
+                [(ngModel)]="userSignUpModel.dateOfBirth" bsDatepicker placeholder="dd/mm/yyyy" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }"
+                required>
+              <label for="datepicker">DOB</label>
+              <div class="underline"></div>
+            </div>
+            <div class="error" *ngIf="dateOfBirth.errors && (dateOfBirth.valid || dateOfBirth.touched)">
+              <span [class.d-none]="dateOfBirth.valid || dateOfBirth.untouched">{{message.DateOfBirthCheck}}</span>
+            </div>
+
+
+            <label class="form-input">
+              <div [class.error_input]="gender.invalid && gender.touched" class="radio-tile-group">
+
+                <div class="input-container">
+
+                  <input id="walk" class="radio-button" required #gender="ngModel" value="M"
+                    [(ngModel)]="userSignUpModel.gender" type="radio" name="gender" />
+                  <div class="radio-tile">
+                    <div class="icon walk-icon">
+
+                    </div>
+                    <label for="walk" class="radio-tile-label">Male</label>
+                    <i class="fa fa-mars" aria-hidden="true"></i>
+                  </div>
+                </div>
+
+                <div class="input-container">
+
+                  <input id="bike" class="radio-button" required #gender="ngModel" value="F"
+                    [(ngModel)]="userSignUpModel.gender" type="radio" name="gender" />
+                  <div class="radio-tile">
+                    <div class="icon bike-icon">
+
+                    </div>
+                    <label for="bike" class="radio-tile-label">Female</label>
+                    <i class="fa fa-venus" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            <div class="error" *ngIf="gender.errors && (gender.valid || gender.touched)">
+              <span [class.d-none]="gender.valid || gender.untouched">{{message.genderField}}</span>
+            </div>
+
+
+            <div [class.error_input]="password.invalid && password.touched" class="form-label-group form-input">
+              <i class="fa fa-eye" [hidden]="!showOrhidePassword" (click)="togglePasswordEye()" aria-hidden="true"></i>
+              <i class="fa fa-eye-slash" [hidden]="showOrhidePassword" (click)="togglePasswordEye()"
+                aria-hidden="true"></i>
+              <input type={{passwordTextBoxValue}} id="Password" class="form-control" placeholder="Password" required
+                (keyup)="validatePasswordAndConfirmPassword(confirmPassword.value,password.value)"
+                pattern="^[a-zA-Z0-9@!#.]{8,}$" #password="ngModel" [(ngModel)]="userSignUpModel.password"
+                name="password">
+              <label for="Password">Password</label>
+              <div class="underline"></div>
+            </div>
+
+            <div class="error" *ngIf="password.errors && (password.valid || password.touched)">
+              <span *ngIf="password.errors.required">{{message.PasswordCheck}}</span>
+              <span *ngIf="password.errors.pattern">{{message.PasswordPolicyCheck}}</span>
+              <span *ngIf="!passwordAndConfimPasswordIsEqual">{{message.PasswordEqualityCheck}}</span>
+            </div>
+
+            <div [class.error_input]="passwordAndConfimPasswordIsEqual && confirmPassword.invalid && confirmPassword.touched"
+              class="form-label-group form-input">
+              <i class="fa fa-eye-slash" [hidden]="showOrhideConfirmPassword" (click)="toggleConfirmPasswordEye()"
+                aria-hidden="true"></i>
+              <i class="fa fa-eye" [hidden]="!showOrhideConfirmPassword" (click)="toggleConfirmPasswordEye()"
+                aria-hidden="true"></i>
+              <input type="password" id="confpassword" class="form-control" placeholder="Confirm Password"
+                (keyup)="validatePasswordAndConfirmPassword(confirmPassword.value,password.value)"
+                type={{confirmPasswordTextBoxValue}} #confirmPassword="ngModel" name="confirmPassword"
+                [(ngModel)]="userSignUpModel.confirmPassword" required>
+              <label for="confpassword">Confirm Password</label>
+              <div class="underline"></div>
+            </div>
+
+            <div class="error" *ngIf="!(confirmPassword.errors) && (confirmPassword.valid || confirmPassword.touched)">
+              <span *ngIf="confirmPassword.errors?.required">{{message.PasswordPolicyCheck}}</span>
+              <span *ngIf="!passwordAndConfimPasswordIsEqual">{{message.PasswordEqualityCheck}}</span>
+            </div>
+
+            <div class="btn_box">
+              <button type="submit" [disabled]="signUpForm.form.invalid" class="btn btn-primary">REGISTER</button>
+              <button type="reset" class="btn btn-light">RESET</button>
+            </div>
+
+          </form>
+
+
+
+
+          <div class="footerbtn_box">
+            <div class="row">
+              <div class="col-sm-6">
+                <button type="button" hidden class="btn">Register as Respondent </button>
+              </div>
+              <div class="col-sm-6">
+                <button type="button" hidden class="btn">Respondent Login</button>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

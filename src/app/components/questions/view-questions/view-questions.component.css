@@ -1,0 +1,306 @@
+.btnprimary {
+    background-color: #50ADE3!important;
+    border-color: #50ADE3!important;
+    color: #fff!important;
+}
+
+.pin {
+    /* margin-top: -5rem;
+    margin-left: 13rem; */
+}
+
+.dflex {
+    /* margin-top: 15px; */
+}
+
+.mdtxt {
+    margin-right: 0.5rem;
+}
+
+.poptxt {
+    color: #000;
+    font-weight: bold;
+    font-size: 15px !important;
+}
+
+.attached-pin {
+    margin-top: 12px;
+}
+
+.plus {
+    text-align: sub;
+}
+
+.btn-default:hover {
+    color: #fff;
+    background-color: transparent;
+    border-color: #ddd;
+}
+
+.h26 {
+    height: 26px;
+    box-shadow: 2px 2px 9px 2px #d0ebc4;
+}
+
+.card {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    margin-bottom: 1rem;
+    font-size: 14px!important;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    border-radius: 20px!important;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.padding25 {
+    padding: 28px 73px;
+}
+
+.mtop {
+    margin-top: 3%;
+}
+
+.content {
+    padding: 0 1.5rem!important;
+}
+
+.addques {
+    width: 37%;
+    margin: 0 auto;
+}
+
+.txt {
+    text-align: justify;
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+.clickbtn {
+    background-color: transparent!important;
+    color: #1491d9!important;
+    width: 100%;
+    font-weight: 600!important;
+    border:1px solid #1491d9!important;
+}
+
+.mtop-5 {
+    margin-top: -5%;
+}
+
+.active {
+    color: #50ade3;
+    font-weight: 500;
+}
+
+.fsize:hover {
+    color: #50ade3!important;
+    font-weight: 500;
+}
+
+.h9 {
+    height: 9px;
+}
+
+.btn-default:hover {
+    color: #2196f3;
+}
+
+.dflex {
+    display: inline-flex;
+}
+
+@media (min-width: 768px) {
+    .offset-md-2 {
+        margin-left: 16.666667%;
+    }
+    .modal-dialog {
+        width: 1100px;
+        margin: 30px auto;
+    }
+}
+
+/******Tooltip******/
+
+.bs-example {
+    margin: 200px 150px 0;
+}
+
+.bs-example button {
+    margin: 10px;
+}
+
+.btn-default:active:hover, .btn-default:active, .btn-default:active:focus {
+    background: transparent;
+    box-shadow: none;
+}
+
+.question-box {
+    padding: 0px;
+    border: 1px solid #ddd;
+    height: 40px;
+}
+
+.attached-btn {
+    background: transparent;
+    border-radius: 0;
+    width: 40px;
+    padding: -1px;
+    border: 0;
+    border-right: 1px solid #ddd;
+}
+
+.attached-pin {
+    background: transparent;
+    right: 60px;
+    float: right;
+    position: absolute;
+    top: 55%;
+    z-index: 999;
+    height: 20px;
+    border: 0;
+}
+
+.toggle-button-cover {
+    display: inline-flex;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.button-cover:before {
+    counter-increment: button-counter;
+    content: counter(button-counter);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #d7e3e3;
+    font-size: 12px;
+    line-height: 1;
+    padding: 5px;
+}
+
+.button-cover, .knobs, .layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: relative;
+    top: 50%;
+    width: 74px;
+    height: 31px;
+    margin: -4px auto 0 auto;
+    overflow: hidden;
+}
+
+.button.r, .button.r .layer {
+    border-radius: 100px;
+}
+
+.button.b2 {
+    border-radius: 2px;
+}
+
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs {
+    z-index: 2;
+}
+
+.layer {
+    width: 100%;
+    background-color: #68C93C;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+/* Button 1 */
+
+#button-1 .knobs:before {
+    content: 'YES';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 23px;
+    color: #66BB6A;
+    font-size: 8px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+
+#button-1 .checkbox:checked+.knobs:before {
+    content: 'NO';
+    left: 42px;
+    background-color: #f44336;
+    color: #fff;
+}
+
+#button-1 .checkbox:checked~.layer {
+    background-color: #fcebeb;
+}
+
+#button-1 .knobs, #button-1 .knobs:before, #button-1 .layer {
+    transition: 0.3s ease all;
+}
+
+.mendatory {
+    margin-left: -32%;
+    margin-top: 1.2%;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 1114px!important;
+        margin: 1.75rem auto;
+    }
+}
+
+.greenlisting {
+    background-color: #4caf50!important;
+    background-image: linear-gradient(to right, #e7fbdf, #fff)!important;
+    border-radius: 21px;
+}
+
+.greens:hover {
+    background-color: #4caf50!important;
+    background-image: linear-gradient(to right, #e7fbdf, #fff)!important;
+    border-radius: 21px;
+}
+
+.mtop14 {
+    margin-top: 14%;
+}
+.addqueswidth{
+    width: 35%;
+}

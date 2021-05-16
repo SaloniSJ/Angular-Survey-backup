@@ -1,0 +1,69 @@
+<div class="mainbodydiv mtop">
+  <div class="row">
+    <div class="col-md-12">
+      <!-----form start----->
+      <div class="form" *ngFor="let question of question_list" >
+        <div class="card m0 bradius">
+          <div class="card-body padding25">
+            <div class="question-box">
+              <div class="dflexxw">
+                <div class="col-md-10 inputques">
+                  <input
+                    type="text"
+                    placeholder="What is Your Favorite Perfume?"
+                    class="inputfield"
+                    [value]=question.questionText
+                  />
+                </div>
+                <div class="col-md-2">
+                  <span class="float-right">
+                    <div class="upload-btn-wrapper">
+                      <button class="btn">
+                        <img
+                          src="../../../../assets/img/attached.png"
+                          class="pin"
+                        />
+                      </button>
+                      <input type="file" name="myfile" />
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="m4">
+              <div class="dflex">
+                <div class="float-left">Answer</div>
+              </div>
+              <div class="clearfix"></div>
+              <!-- Dynamic loading starts here. -->
+
+              <dynamic-form [fields]=question.surveyOptionResponseBeans (submit)="submit($event)">
+              </dynamic-form>
+
+              <div class="progress" *ngIf="question.questionType=='CHIP_DISTRIBUTION'">
+                <div
+                  class="progress-bar progress-bar-success"
+                  role="progressbar"
+                  style="width:40%"
+                >
+                  Option1 <span class="displaytxt"> (40%) </span>
+                </div>
+          
+                <div
+                  class="progress-bar progress-bar-warning"
+                  role="progressbar"
+                  style="width:30%"
+                >
+                  Option2 <span class="displaytxt"> (30%) </span>
+                </div>
+              </div>
+              <!-- Dynamic loading ends here. -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+      <!-- The Modal -->
+    </div>
+  </div>
+</div>
