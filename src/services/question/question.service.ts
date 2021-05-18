@@ -15,15 +15,32 @@ export class QuestionService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     })
   }
 
- 
+  httpMultimediaHeader = {
+    headers: new HttpHeaders({
+       'Content-Type': 'image/jpeg', 
+    })
+  }
   constructor(private httpClient: HttpClient) { }
 
-  fetchPreSignedUrl(){
-    return this.httpClient.get<any>(this.apiURL+'/generate-presigned-url',this.httpOptions)
+  uploadImageToS3(apiUrl,image){
+    console.log(image)
+   const data={
+     fileName:image.fileName,
+     image:image
+   }
+    return this.httpClient.put<any>(apiUrl,data,this.httpMultimediaHeader)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  fetchPreSignedUrl(data){
+    console.log("fetchPreSignedUrldata",data)
+    return this.httpClient.get<any>(this.apiURL+`/generate-presigned-url?key=${data.question_id}/${data.image_name}`,this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

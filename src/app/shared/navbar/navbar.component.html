@@ -19,28 +19,39 @@
           </ul>
 
           <!-- Left navbar links :: Pagination Content Starts from here  -->
-          <!-- <app-view-survey #viewsurvey></app-view-survey> -->
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" *ngIf="page_name == 'View Survey'">
             <li class="nav-item d-none d-sm-inline-block widthlenth">
               <!-- <div class="">
-                <div class="input-group ptop">
-                  <div class="input-group-addon sinput">
-                    <i class="fa fa-search searchicon"></i>
-                  </div>
-                  <input
-                    type="text"
-                    class="form-control searchbx"
-                    data-mask=""
-                    placeholder="Search Here"
-                  />
-                </div>
-              </div> -->
+                                <div class="input-group ptop">
+                                    <div class="input-group-addon sinput">
+                                        <i class="fa fa-search searchicon"></i>
+                                    </div>
+                                    <input type="text" class="form-control searchbx" data-mask=""
+                                        placeholder="Search Here">
+                                </div>
+                               
+                            </div> -->
               <mat-paginator
-                [length]="100"
-                [pageSize]="10"
+                #paginator
+                [length]="total_elements"
+                [pageSize]="page_size"
                 [pageSizeOptions]="[5, 10, 25, 100]"
+                [pageIndex]="page_number"
+                (page)="pageEvent = changePageNumber($event)"
               >
               </mat-paginator>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav" *ngIf="page_name == 'Create Survey'">
+            <li class="nav-item d-none d-sm-inline-block widthlenth">
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="navigateToPreviewSurvey()"
+              >
+                Preview
+              </button>
             </li>
           </ul>
 

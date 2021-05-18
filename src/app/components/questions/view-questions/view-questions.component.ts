@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { InteractionWithTopNavigationServiceService } from 'src/app/shared/service/interaction-with-top-navigation-service.service';
 
 @Component({
   selector: 'app-view-questions',
@@ -14,7 +15,8 @@ export class ViewQuestionsComponent implements OnInit {
 
   public survey_name: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private interactionWithTopNavigation: InteractionWithTopNavigationServiceService) {
     console.log(
       'Router Navigation data===>',
       this.router.getCurrentNavigation().extras.state
@@ -27,7 +29,13 @@ export class ViewQuestionsComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const dataToTopNavigation = {
+      id:'',
+      page_name: 'View Question'
+    }
+    this.interactionWithTopNavigation.sendSurveyData(dataToTopNavigation);
+  }
 
   // close(value: string) {
   //   this.ref.close(value);
@@ -39,7 +47,7 @@ export class ViewQuestionsComponent implements OnInit {
       survey_name: this.survey_name,
       question_type: question_type,
     };
-    this.router.navigate(['survey/create-question', this.survey_id]);
+    this.router.navigate(['survey/create-question', this.survey_id,question_type]);
     // this.router.navigateByUrl('survey/create-question', {
     //   state: { data: data_to_be_forwarded },
     // });

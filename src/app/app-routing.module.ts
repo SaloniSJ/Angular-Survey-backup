@@ -39,6 +39,10 @@ const routes: Routes = [
         component:ViewQuestionsComponent
       },
       {
+        path:'create-question/:survey_id/:question_type',
+        component:CreateQuestionsComponent
+      },
+      {
         path:'create-question/:survey_id',
         component:CreateQuestionsComponent
       },

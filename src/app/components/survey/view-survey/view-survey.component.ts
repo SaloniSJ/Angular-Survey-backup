@@ -24,40 +24,27 @@ import { InteractionWithTopNavigationServiceService } from 'src/app/shared/servi
   styleUrls: ['./view-survey.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ViewSurveyComponent implements OnChanges {
+export class ViewSurveyComponent implements OnInit {
   hasError: boolean = false;
   errorMsg: string = '';
   survey_list: [];
   message = new Message();
   user_id = '';
-  survey_id='';
-
-  @Input() is_child:boolean;
-
-  @Output() childToParent = new EventEmitter(); 
-
-  addchildToParent(value){
-    //emit value survey_id
-    
-  }
+  survey_id = '';
 
   constructor(
     private surveyService: SurveyService,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private interactionWithTopNavigation:InteractionWithTopNavigationServiceService
+    private _interactionWithTopNavigation: InteractionWithTopNavigationServiceService
   ) {
-    console.log("Constructor of Child")
   }
-
-  ngOnChanges(changes: SimpleChanges){
-
-    console.log(changes);
-
-  }
-
   sendMessageViaService() {
-    this.interactionWithTopNavigation.sendMessage('Hey I am from view Survey')
+    const dataToTopNavigation = {
+      id: '',
+      page_name: 'View Survey'
+    }
+    this._interactionWithTopNavigation.sendSurveyData(dataToTopNavigation);
   }
 
   ngOnInit(): void {
@@ -72,6 +59,13 @@ export class ViewSurveyComponent implements OnChanges {
         if (response.status) {
           console.log(response);
           this.survey_list = response.surveyDetails;
+          const page_details={
+            pageNumber: response.pageNumber,
+            size: response.size,
+            totalElements: response.totalElements,
+            totalPages: response.totalPages
+          }
+          this._interactionWithTopNavigation.sendPaginationDetailsSource(page_details);
           this.spinner.hide();
         } else {
           this.hasError = true;
@@ -85,6 +79,11 @@ export class ViewSurveyComponent implements OnChanges {
         this.errorMsg == this.message.error;
       }
     );
+
+    this._interactionWithTopNavigation.surveyListSource$.subscribe(message => {
+      console.log("Current Survey List :: ", message)
+      this.survey_list = message;
+    })
   }
 
   fetchAllSurvey(page_no) {

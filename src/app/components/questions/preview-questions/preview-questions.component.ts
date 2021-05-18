@@ -43,6 +43,8 @@ export class PreviewQuestionsComponent implements OnInit {
       surveyId: this.survey_id,
       userId: user_id,
       languageCode: 'en',
+      page:0,
+      size:10
     };
     console.log(data);
     this.questionService.fetchQuestions(data).subscribe(

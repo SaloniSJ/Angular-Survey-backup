@@ -46,7 +46,7 @@ export class CreateQuestionsComponent implements OnInit {
 
   public rating_icon: string = '';
 
-  public preSignedUrl: string= '';
+  public preSignedUrl: string = '';
 
   public options: any[] = [
     {
@@ -69,7 +69,7 @@ export class CreateQuestionsComponent implements OnInit {
 
   public disable_add_option_icon: Boolean = false;
 
-  public question_type: string = '';
+  public question_type: string = 'RADIO';
 
   public survey_id: string = '';
 
@@ -101,7 +101,7 @@ export class CreateQuestionsComponent implements OnInit {
     public matDialog: MatDialog,
     private toastr: ToastrService,
     private modalService: ModalActionsService,
-    private interactionWithTopNavigation:InteractionWithTopNavigationServiceService
+    private interactionWithTopNavigation: InteractionWithTopNavigationServiceService
   ) {
   }
 
@@ -123,6 +123,7 @@ export class CreateQuestionsComponent implements OnInit {
           this.total_pages = response.totalPages;
         } else {
           this.spinner.hide();
+          this.is_preview_question_modal_visible = false;
           console.log('Error====>', response);
         }
       },
@@ -133,7 +134,7 @@ export class CreateQuestionsComponent implements OnInit {
     );
   }
 
-  public changePageNumber(e?:PageEvent) {
+  public changePageNumber(e?: PageEvent) {
     console.log(e);
     const payload = {
       surveyId: this.survey_id,
@@ -169,11 +170,17 @@ export class CreateQuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id=this.route.snapshot.paramMap.get('survey_id')
-    this.survey_id=id;
+    const id = this.route.snapshot.paramMap.get('survey_id')
+    this.survey_id = id;
+    const type=this.route.snapshot.paramMap.get('question_type')
+    this.question_type=type;
     this.userId = localStorage.getItem('userId');
     console.log(this.userId);
-    this.interactionWithTopNavigation.sendSurveyData(id);
+    const dataToTopNavigation={
+      id:id,
+      page_name:'Create Survey'
+    }
+    this.interactionWithTopNavigation.sendSurveyData(dataToTopNavigation);
     const payload = {
       surveyId: id,
       userId: localStorage.getItem('userId'),
@@ -183,10 +190,10 @@ export class CreateQuestionsComponent implements OnInit {
     };
     this.fetchAllQuestion(payload);
     this.fetchAllQuestionTypes();
-   // this.fetchPreSignedUrl();
+    // this.fetchPreSignedUrl();
   }
 
-  editQuestion(survey_data){
+  editQuestion(survey_data) {
     console.log(survey_data);
     //data is not getting loaded in form
     const payload = {
@@ -206,9 +213,9 @@ export class CreateQuestionsComponent implements OnInit {
       threshold: survey_data.threshold,
       icon: survey_data.icon,
     };
-    this.is_add_question_modal_visible=true,
-    this.is_preview_question_modal_visible=false,
-    console.log("Edit question payload==>",payload)
+    this.is_add_question_modal_visible = true,
+      this.is_preview_question_modal_visible = false,
+      console.log("Edit question payload==>", payload)
   }
 
   handleOptionCss(option_css) {
@@ -222,15 +229,25 @@ export class CreateQuestionsComponent implements OnInit {
     }
   }
 
-  fetchPreSignedUrl(){
-    this.questionService.fetchPreSignedUrl().subscribe(response=>{
+  fetchPreSignedUrl(image) {
+    console.log(image)
+    const data={
+      question_id:'3',
+      image_name:image.name
+    }
+    this.questionService.fetchPreSignedUrl(data).subscribe(response => {
       console.log(response)
-      if(response.status){
-        this.preSignedUrl=response.presignedUrl;
-      }else{
+      if (response.status) {
+        this.preSignedUrl = response.presignedUrl;
+        this.questionService.uploadImageToS3(response.presignedUrl, image).subscribe(response=>{
+          console.log(response)
+        },error=>{
+          console.log(error)
+        })
+      } else {
         this.toastr.error('There is problem with uploading image....')
       }
-    },error=>{
+    }, error => {
       console.log(error);
     })
   }
@@ -333,6 +350,8 @@ export class CreateQuestionsComponent implements OnInit {
         otherOptionAvailable: option.other_option_available,
       });
     });
+
+    // this.fetchPreSignedUrl(this.options[0].option_image_file);
     this.question_option.splice(0, 1);
     this.questionJSON.options = this.question_option;
 
@@ -354,67 +373,67 @@ export class CreateQuestionsComponent implements OnInit {
       questionStatus: 'ACTIVE',
       questionText: this.questionJSON.questionText,
       options: this.question_option,
-      threshold: this.questionJSON.threshold,
+      thresholdLimit: this.questionJSON.threshold,
       icon: this.questionJSON.icon,
     };
 
     console.log(payload);
 
-    // this.questionService.createQuestion(payload).subscribe(
-    //   (response) => {
-    //     console.log(response);
-    //     if (response.status) {
-    //       this.toastr.success('Question Created Successfully!');
-    //       this.is_preview_question_modal_visible = true;
-    //       this.spinner.hide();
+    this.questionService.createQuestion(payload).subscribe(
+      (response) => {
+        console.log(response);
+        if (response.status) {
+          this.toastr.success('Question Created Successfully!');
+          this.is_preview_question_modal_visible = true;
+          this.spinner.hide();
 
-    //       this.question_list = response.surveyQuestionResponseBeans;
-    //       this.page_number = response.pageNumber;
-    //       // this.page_size = response.size;
-    //       this.page_size=10
-    //       this.total_elements = response.totalElements;
-    //       this.total_pages = response.totalPages;
-    //       this.is_add_question_modal_visible = false;
+          this.question_list = response.surveyQuestionResponseBeans;
+          this.page_number = response.pageNumber;
+          // this.page_size = response.size;
+          this.page_size = 10
+          this.total_elements = response.totalElements;
+          this.total_pages = response.totalPages;
+          this.is_add_question_modal_visible = false;
 
-    //       this.questionJSON.questionType = '';
-    //       this.questionJSON.isMandatory = true;
-    //       this.questionJSON.isHavingMultimedia = false;
-    //       this.questionJSON.isRandomized = true;
-    //       this.questionJSON.isHorizontal = true;
-    //       this.questionJSON.isVertical = false;
-    //       this.questionJSON.languageCode = 'en';
-    //       this.questionJSON.orderNumber = '';
-    //       this.questionJSON.pageNumber = '1';
-    //       this.questionJSON.questionStatus = '';
-    //       this.questionJSON.questionText = '';
-    //       this.questionJSON.options = [];
-    //       this.questionJSON.threshold = 0;
-    //       this.questionJSON.icon = '';
-    //       // this.router.navigate(['survey/preview-question', this.survey_id]);
-    //     } else {
-    //       this.spinner.hide();
-    //       this.questionJSON.questionType = '';
-    //       this.questionJSON.isMandatory = true;
-    //       this.questionJSON.isHavingMultimedia = false;
-    //       this.questionJSON.isRandomized = true;
-    //       this.questionJSON.isHorizontal = true;
-    //       this.questionJSON.isVertical = false;
-    //       this.questionJSON.languageCode = 'en';
-    //       this.questionJSON.orderNumber = '';
-    //       this.questionJSON.pageNumber = '1';
-    //       this.questionJSON.questionStatus = '';
-    //       this.questionJSON.questionText = '';
-    //       this.questionJSON.options = [];
-    //       this.questionJSON.threshold = 0;
-    //       this.questionJSON.icon = '';
-    //       this.toastr.error('Message : ', response.message);
-    //     }
-    //   },
-    //   (error) => {
-    //     this.spinner.hide();
-    //     console.log(error);
-    //   }
-    // );
+          this.questionJSON.questionType = '';
+          this.questionJSON.isMandatory = true;
+          this.questionJSON.isHavingMultimedia = false;
+          this.questionJSON.isRandomized = true;
+          this.questionJSON.isHorizontal = true;
+          this.questionJSON.isVertical = false;
+          this.questionJSON.languageCode = 'en';
+          this.questionJSON.orderNumber = '';
+          this.questionJSON.pageNumber = '1';
+          this.questionJSON.questionStatus = '';
+          this.questionJSON.questionText = '';
+          this.questionJSON.options = [];
+          this.questionJSON.threshold = 0;
+          this.questionJSON.icon = '';
+          // this.router.navigate(['survey/preview-question', this.survey_id]);
+        } else {
+          this.spinner.hide();
+          this.questionJSON.questionType = '';
+          this.questionJSON.isMandatory = true;
+          this.questionJSON.isHavingMultimedia = false;
+          this.questionJSON.isRandomized = true;
+          this.questionJSON.isHorizontal = true;
+          this.questionJSON.isVertical = false;
+          this.questionJSON.languageCode = 'en';
+          this.questionJSON.orderNumber = '';
+          this.questionJSON.pageNumber = '1';
+          this.questionJSON.questionStatus = '';
+          this.questionJSON.questionText = '';
+          this.questionJSON.options = [];
+          this.questionJSON.threshold = 0;
+          this.questionJSON.icon = '';
+          this.toastr.error('Message : ', response.message);
+        }
+      },
+      (error) => {
+        this.spinner.hide();
+        console.log(error);
+      }
+    );
   }
 
   deleteQuestion(question_id, language_code) {
@@ -445,10 +464,10 @@ export class CreateQuestionsComponent implements OnInit {
     );
   }
 
-  openImageModalWindow(image_url){
+  openImageModalWindow(image_url) {
     const dialogRef = this.matDialog.open(ModalComponent, {
       width: '1000px',
-      data: {image_url,image:true},
+      data: { image_url, image: true },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -478,7 +497,7 @@ export class CreateQuestionsComponent implements OnInit {
     ];
     const dialogRef = this.matDialog.open(ModalComponent, {
       width: '1000px',
-      data: {image:false,questionTypeList:this.questionTypeList},
+      data: { image: false, questionTypeList: this.questionTypeList },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
